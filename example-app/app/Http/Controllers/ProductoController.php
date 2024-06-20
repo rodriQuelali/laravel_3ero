@@ -8,12 +8,20 @@ use Spatie\FlareClient\View;
 class ProductoController extends Controller
 {
     //
+    // public function __invoke() {
+        
+    // }
+
     public function index() {
-        return View('productos');
+        return view('producto.productos');
     }
     
     public function crear(){
-        return "Creando Producto";
+        return view('producto.creando');
+    }
+
+    public function verProducto($datos) {
+        return view('producto.verProducto',["datos"=> $datos]);
     }
 
 }
