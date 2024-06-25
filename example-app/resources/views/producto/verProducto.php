@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>productos</h1>
+    <h1>ver producto <?php echo $datos?></h1>
 </body>
 </html>

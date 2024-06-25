@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,22 +22,32 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', InicioController::class);
 
-Route::get('productos', fn()=> 'hola Producto');
+Route::controller(ProductoController::class)->group(function () {
+    Route::get('productos', 'index');
+    Route::get('productos/creando',  'crear');
+    Route::get('productos/{datos}',  'verProducto');
+});
+Route::controller(ClientesController::class)->group(function () {
+    Route::get('cliente', 'index');
+    Route::get('cliente/creando',  'crear');
+    //Route::get('cliente/{datos}',  'verProducto');
+});
+// Route::get('productos', [ProductoController::class, 'index']);
+// Route::get('productos/creando', [ProductoController::class, 'crear']);
+
+// //paso de variables
+// Route::get('productos/{datos}', [ProductoController::class, 'verProducto'] );
+
+
+//clientes
 Route::get('clientes', function () {
    return 'HOLA Clientes' ;
 });
 
 //rutas mas datos.
-Route::get('productos/creando', function(){
-    return 'Creando Productos';
-});
 
-//paso de variables
-Route::get('productos/{datos}', function($datos){
-    return "producto $datos";
-});
 
 //paso de parametros con dos variables.
-Route::get('productos/{datos}/{cliente}', function($datos, $cliente){
-    return "producto $datos, $cliente";
-});
+// Route::get('productos/{datos}/{cliente}', function($datos, $cliente){
+//     return "producto $datos, $cliente";
+// });
