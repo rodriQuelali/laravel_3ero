@@ -23,8 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', InicioController::class);
 
 Route::controller(ProductoController::class)->group(function () {
-    Route::get('productos', 'index');
-    Route::get('productos/creando',  'crear');
+    Route::get('productos', 'index')->name('productos.index');
+    Route::get('productos/creando',  'crear')->name('productos.crear');
+    Route::post('productos', 'store')->name('productos.store');
     Route::get('productos/{datos}',  'verProducto');
 });
 Route::controller(ClientesController::class)->group(function () {
