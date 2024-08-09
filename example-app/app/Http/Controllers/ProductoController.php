@@ -29,18 +29,18 @@ class ProductoController extends Controller
 
     public function store(Request $request){
 
-        /*$validatedData= $request->validate([
-            'nombre' => 'required|string|max:255|unique:productos,nombre',
+        $validatedData= $request->validate([
+            'Nombre' => 'required|string|max:255',
             'stock' => 'required|integer|min:0',
-            'precio_unitario' => 'required|numeric|min:0',
-            'descripcion' => 'nullable|string|max:1000',
+            'PrecioUnitario' => 'required|numeric|min:0',
+            'Descripcion' => 'nullable|string|max:1000',
         ]);
     
         Producto::create($validatedData);
 
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
-        */
-        return 'se guardo correctamente los productos'. $request;
+        
+       //return 'se guardo correctamente los productos'. $request->Nombre;
     }
 
 }
