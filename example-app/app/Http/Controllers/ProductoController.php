@@ -43,4 +43,10 @@ class ProductoController extends Controller
        //return 'se guardo correctamente los productos'. $request->Nombre;
     }
 
+    public function destroy(Producto $ProductoID) {
+        //$producto = Producto::findOrFail($ProductoID);
+        $ProductoID->delete();
+        return redirect()->route('productos.index')->with('success', 'Se elimono.');
+    }
+
 }

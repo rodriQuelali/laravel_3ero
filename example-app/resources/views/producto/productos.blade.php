@@ -23,16 +23,20 @@
         </thead>
         
         <tbody>
-            @foreach ($productos as $tem)
+            @foreach ($productos as $producto)
             <tr>
                 <th scope="row">1</th>
-                <td>{{$tem->Nombre}}</td>
-                <td>{{$tem->stock}}</td>
-                <td>{{$tem->PrecioUnitario}}</td>
-                <td>{{$tem->Descripcion}}</td>
+                <td>{{$producto->Nombre}}</td>
+                <td>{{$producto->stock}}</td>
+                <td>{{$producto->PrecioUnitario}}</td>
+                <td>{{$producto->Descripcion}}</td>
                 <td>
                   <a href="" class="btn btn-primary">Editar</a>
-                  <a href="" class="btn btn-danger">Eliminar</a>
+                  <form action="{{ route('productos.delete', $producto) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
                 </td>
             </tr>
           @endforeach

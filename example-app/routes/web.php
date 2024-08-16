@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,13 +21,15 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::get('/', InicioController::class);
+Route::get('/', LoginController::class);
+Route::get('home', InicioController::class)->name('inicio');
 
 Route::controller(ProductoController::class)->group(function () {
     Route::get('productos', 'index')->name('productos.index');
     Route::get('productos/creando',  'crear')->name('productos.crear');
     Route::post('productos', 'store')->name('productos.store');
-    Route::get('productos/{datos}',  'verProducto');
+    Route::get('productos/{datos}', 'verProducto');
+    Route::delete('productos/{ProductoID}', 'destroy')->name('productos.delete');
 });
 Route::controller(ClientesController::class)->group(function () {
     Route::get('cliente', 'index');
