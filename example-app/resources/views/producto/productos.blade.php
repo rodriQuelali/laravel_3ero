@@ -31,7 +31,7 @@
                 <td>{{$producto->PrecioUnitario}}</td>
                 <td>{{$producto->Descripcion}}</td>
                 <td>
-                  <a href="" class="btn btn-primary">Editar</a>
+                  <a href="{{ route('productos.show', $producto->ProductoID)}}" class="btn btn-primary">Editar</a>
                   <form action="{{ route('productos.delete', $producto) }}" method="post">
                     @csrf
                     @method('DELETE')

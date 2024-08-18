@@ -28,8 +28,9 @@ Route::controller(ProductoController::class)->group(function () {
     Route::get('productos', 'index')->name('productos.index');
     Route::get('productos/creando',  'crear')->name('productos.crear');
     Route::post('productos', 'store')->name('productos.store');
-    Route::get('productos/{datos}', 'verProducto');
+    Route::get('productos/{id}', 'show')->name('productos.show');
     Route::delete('productos/{ProductoID}', 'destroy')->name('productos.delete');
+    Route::put('productos', 'update')->name('productos.edit');
 });
 Route::controller(ClientesController::class)->group(function () {
     Route::get('cliente', 'index');

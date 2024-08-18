@@ -23,8 +23,10 @@ class ProductoController extends Controller
         return view('producto.creando');
     }
 
-    public function verProducto($datos) {
-        return view('producto.verProducto',["datos"=> $datos]);
+    public function show($id) {
+
+        $produsto = Producto::findOrFail($id);
+        return view('producto.verProducto',["datos"=> $produsto]);
     }
 
     public function store(Request $request){
@@ -47,6 +49,10 @@ class ProductoController extends Controller
         //$producto = Producto::findOrFail($ProductoID);
         $ProductoID->delete();
         return redirect()->route('productos.index')->with('success', 'Se elimono.');
+    }
+
+    public function update() {
+        
     }
 
 }
