@@ -20,23 +20,31 @@ use Illuminate\Support\Facades\Route;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
+Route::get('/', [LoginController::class, 'loginInicio'])->name('login');
+Route::get('login', [LoginController::class, 'loginInicio'])->name('login');
+Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+//midelware
 
-Route::get('/', LoginController::class);
-Route::get('home', InicioController::class)->name('inicio');
+Route::middleware('auth')->group(function (){
+    Route::get('home', [InicioController::class, 'inicio'])->name('inicio');
 
-Route::controller(ProductoController::class)->group(function () {
-    Route::get('productos', 'index')->name('productos.index');
-    Route::get('productos/creando',  'crear')->name('productos.crear');
-    Route::post('productos', 'store')->name('productos.store');
-    Route::get('productos/{id}', 'show')->name('productos.show');
-    Route::delete('productos/{ProductoID}', 'destroy')->name('productos.delete');
-    Route::put('productos', 'update')->name('productos.edit');
+    Route::controller(ProductoController::class)->group(function () {
+        Route::get('productos', 'index')->name('productos.index');
+        Route::get('productos/creando',  'crear')->name('productos.crear');
+        Route::post('productos', 'store')->name('productos.store');
+        Route::get('productos/{id}', 'show')->name('productos.show');
+        Route::delete('productos/{ProductoID}', 'destroy')->name('productos.delete');
+        Route::put('productos', 'update')->name('productos.edit');
+    });
+    Route::controller(ClientesController::class)->group(function () {
+        Route::get('cliente', 'index');
+        Route::get('cliente/creando',  'crear');
+        //Route::get('cliente/{datos}',  'verProducto');
+    });
 });
-Route::controller(ClientesController::class)->group(function () {
-    Route::get('cliente', 'index');
-    Route::get('cliente/creando',  'crear');
-    //Route::get('cliente/{datos}',  'verProducto');
-});
+    
+
 // Route::get('productos', [ProductoController::class, 'index']);
 // Route::get('productos/creando', [ProductoController::class, 'crear']);
 
