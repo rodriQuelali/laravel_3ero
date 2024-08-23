@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 class InicioController extends Controller
 {
     //
-    public function __invoke(){
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    public function inicio(){
         return view('inicio');
     }
 }
