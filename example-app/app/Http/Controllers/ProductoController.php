@@ -13,7 +13,10 @@ class ProductoController extends Controller
     // public function __invoke() {
         
     // }
-
+    
+    public function __construct() {
+        $this->middleware('auth');
+    }
     public function index() {
         $productos = Producto::all();
         return view('producto.productos', ["productos"=> $productos]);
