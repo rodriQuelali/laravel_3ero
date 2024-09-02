@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//forma para llamar de general
+Route::apiResource('categoria', Categoria::class);
+
+//empoints son para llamar mas espcifcios o por grupo
+Route::get('categoria', [Categoria::class, 'index']);
+Route::get('categoria/{id}', [Categoria::class, 'show']);
+Route::post('categoria', [Categoria::class, 'store']);
+Route::put('categoria/{id}', [Categoria::class, 'update']);
+Route::delete('categoria/{id}', [Categoria::class, 'destroy']);
