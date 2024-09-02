@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Categoria as ModelsCategoria;
+use Illuminate\Http\Response;
+
 use Illuminate\Http\Request;
 
 class Categoria extends Controller
@@ -12,6 +16,9 @@ class Categoria extends Controller
     public function index()
     {
         //
+        $cursos = ModelsCategoria::all();
+        return response()->json($cursos, Response::HTTP_OK);
+
     }
 
     /**
@@ -20,6 +27,8 @@ class Categoria extends Controller
     public function store(Request $request)
     {
         //
+        return ModelsCategoria::create($request->all());
+
     }
 
     /**
@@ -28,6 +37,8 @@ class Categoria extends Controller
     public function show(string $id)
     {
         //
+        return ModelsCategoria::find($id);
+
     }
 
     /**
@@ -36,6 +47,10 @@ class Categoria extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $curso = ModelsCategoria::find($id);
+        $curso->update($request->all());
+        return $curso;
+
     }
 
     /**
@@ -44,5 +59,7 @@ class Categoria extends Controller
     public function destroy(string $id)
     {
         //
+        return ModelsCategoria::destroy($id);
+
     }
 }
