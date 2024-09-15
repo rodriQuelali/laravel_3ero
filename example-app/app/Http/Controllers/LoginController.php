@@ -12,6 +12,7 @@ class LoginController extends Controller
     public function loginInicio(){
         return view('login.login');
     } 
+    
     public function login(Request $request){
         $request->validate([
             'email' => 'required|email',
