@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Categoria;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
@@ -17,15 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
 
+Route::middleware(['auth:sanctum'])->group(function(){
 //forma para llamar de general
-Route::apiResource('categoria', Categoria::class);
-Route::apiResource('producto', ProductoController::class);
-Route::post('productoFecha', [ProductoController::class, 'consultaFecha']);
+    Route::apiResource('categoria', Categoria::class);
+    Route::apiResource('producto', ProductoController::class);
+    Route::post('productoFecha', [ProductoController::class, 'consultaFecha']);
+    Route::get('logout', [AuthController::class, 'logout']);
+});
 
 //empoints son para llamar mas espcifcios o por grupo
 /*Route::get('categoria', [Categoria::class, 'index']);
