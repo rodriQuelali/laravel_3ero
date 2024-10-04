@@ -37,7 +37,9 @@ class Categoria extends Controller
     public function show(string $id)
     {
         //
-        return ModelsCategoria::find($id);
+        $categoria = ModelsCategoria::findOrFail($id); // Esto lanzará ModelNotFoundException si no existe
+
+        return response()->json($categoria);
 
     }
 
