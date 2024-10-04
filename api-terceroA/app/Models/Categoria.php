@@ -18,4 +18,8 @@ class Categoria extends Model
         //hasMany
         return $this->hasMany(Producto::class, 'CategoriaID');
     }
+
+    public function getNombreProducto(){
+        return $this->Nombre .' - '.$this->CategoriaID;
+    }
 }
