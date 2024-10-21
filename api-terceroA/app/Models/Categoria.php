@@ -22,4 +22,9 @@ class Categoria extends Model
     public function getNombreProducto(){
         return $this->Nombre .' - '.$this->CategoriaID;
     }
+
+    public function getDescripcion(){
+        $nuevo = ucfirst(trim($this->Nombre));
+        return 'Detalle: ' .$nuevo .', Descripcion: '. $this->Descripcion;
+    }
 }
