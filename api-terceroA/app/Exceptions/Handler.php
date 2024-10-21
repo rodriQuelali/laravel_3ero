@@ -42,12 +42,18 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e, $request) {
+        $this->reportable(function (Throwable $e) {
             //
-            if($e instanceof ModelNotFoundException && $request->is('api/categoria/*')){
+            // if($e instanceof ModelNotFoundException && $request->is('api/categoria/*')){
+            //     return response()->json([
+            //         'status' => false,
+            //         'message' => ' the selected ID is invalid',
+            //     ], 404);
+            // }
+            if ($e instanceof ModelNotFoundException) {
                 return response()->json([
                     'status' => false,
-                    'message' => ' the selected ID is invalid',
+                    'message' => 'Recurso no encontrado',
                 ], 404);
             }
         });

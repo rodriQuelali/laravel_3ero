@@ -34,7 +34,7 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => 'Hay errores en los datos proporcionados.',
                 'errors' => $validacion->errors(),
-            ], 422);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         //guardado
         $user = User::create([
