@@ -21,12 +21,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('list', [AuthController::class, 'list']);
 Route::apiResource('ventas', VentasController::class);
+Route::apiResource('categoria', Categoria::class);
 
 
 Route::middleware(['auth:sanctum'])->group(function(){
 //forma para llamar de general
-    Route::apiResource('categoria', Categoria::class);
+    
     Route::apiResource('producto', ProductoController::class);
     Route::post('productoFecha', [ProductoController::class, 'consultaFecha']);
     Route::get('logout', [AuthController::class, 'logout']);
