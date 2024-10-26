@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Models\Categoria;
+use App\Models\Producto;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
+use Illuminate\Http\Response as status;
 
 class TestProductos extends TestCase
 {
@@ -14,28 +17,33 @@ class TestProductos extends TestCase
      */
     use RefreshDatabase;
 
-    public function setUp(): void{
+    protected static $urls;
+    protected $data;
+    protected $dataIngresarCategoria;
+    protected $dataProducto;
+
+    static public function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
+        self::$urls = "/api/categoria";
+        
+    }
+    //seTup-->
+    public function setUp() : void {
         parent::setUp();
         $this->artisan('migrate');
+        $this->dataIngresarCategoria = Categoria::factory()->create();
+        $this->dataProducto = Producto::factory()->count(5)->for($this->dataIngresarCategoria)->create();
+        
     }
 
-
-    public function test_example(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
-    public function test_producto(){
+    //listado de datos.
+    public function test_list(){
         //Artisan::all('migrate');
-        $data = $this->postJson('/api/register', [
-            'name'=>"ssss",
-            'email'=>"hhhh@gmail.com",
-            'password'=>1222,
-            'password_confirmation' => 1222,
-        ]);
-        $data->assertStatus(201);
+        print_r($this->dataProducto);
+        $data = $this->getJson(self::$urls);
+
+        $data->assertStatus(status::HTTP_OK);
 
     }
 }

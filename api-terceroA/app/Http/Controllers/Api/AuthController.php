@@ -94,4 +94,8 @@ class AuthController extends Controller
             'message' => 'inicio de session cerrado'
         ]);
     }
+
+    public function list(){
+        return response()->json(User::all());
+    }
 }
