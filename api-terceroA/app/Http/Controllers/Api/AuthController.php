@@ -34,7 +34,7 @@ class AuthController extends Controller
                 'success' => false,
                 'message' => 'Hay errores en los datos proporcionados.',
                 'errors' => $validacion->errors(),
-            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+            ], 422);
         }
         //guardado
         $user = User::create([
@@ -87,6 +87,7 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
+
     public function logout(){
         auth()->user()->tokens()->delete();
         return response()->json([
@@ -95,7 +96,41 @@ class AuthController extends Controller
         ]);
     }
 
+
     public function list(){
-        return response()->json(User::all());
+        $user = User::all();
+        return response()->json($user, Response::HTTP_OK);
+    }
+
+    public function update(Request $request, $id){
+        
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id, 
+            'password' => 'sometimes|nullable|string|min:8|confirmed', 
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($validatedData['password']);
+        }
+
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usuario actualizado correctamente.',
+            'user' => $user
+        ], 200);
+    }
+
+    public function delete(string $id){
+
+        return response()->json(User::destroy($id), Response::HTTP_OK);
+        
     }
 }
