@@ -41,6 +41,7 @@ class TestProductos extends TestCase
     public function test_list(){
         //Artisan::all('migrate');
         print_r($this->dataProducto);
+        
         $data = $this->getJson(self::$urls);
 
         $data->assertStatus(status::HTTP_OK);
