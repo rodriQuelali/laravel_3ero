@@ -36,6 +36,9 @@ class ProductoController extends Controller
         return response()->json($retornar, HttpFoundationResponse::HTTP_OK);
 
     }
+    public function list_product(){
+        return response()->json(Producto::all());
+    }
 
     public function consultaFecha(Request $request) {
 
