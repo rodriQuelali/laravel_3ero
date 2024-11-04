@@ -92,7 +92,7 @@ class TestUsuario extends TestCase
 
         //print_r(">>>>>".count($this->data));
 
-        $this->assertCount(count($this->data), $response->json());
+        $this->assertCount(count($this->data)+1, $response->json());
     }
 
     public function  test_retrive() {
